@@ -5,6 +5,10 @@ public class OrderItem {
     private Product product;
     private double quantity;
 
+    public OrderItem(Product product) {
+        this(product, 1);
+    }
+
     public OrderItem(Product product, double quantity) {
         this.product = product;
         this.quantity = quantity;

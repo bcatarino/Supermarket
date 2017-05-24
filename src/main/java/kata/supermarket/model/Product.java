@@ -30,12 +30,20 @@ public class Product {
 
         Product product = (Product) o;
 
-        return name.equals(product.name);
+        if (Double.compare(product.pricePerUnit, pricePerUnit) != 0) return false;
+        if (name != null ? !name.equals(product.name) : product.name != null) return false;
+        return unit == product.unit;
 
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        int result;
+        long temp;
+        result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (unit != null ? unit.hashCode() : 0);
+        temp = Double.doubleToLongBits(pricePerUnit);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 }
