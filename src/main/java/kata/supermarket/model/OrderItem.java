@@ -10,6 +10,9 @@ public class OrderItem {
     }
 
     public OrderItem(Product product, double quantity) {
+        if (!product.getUnit().valid(quantity)) {
+            throw new IllegalArgumentException("The quantity provided is invalid for the item");
+        }
         this.product = product;
         this.quantity = quantity;
     }

@@ -6,6 +6,12 @@ public class Product {
     private double pricePerUnit;
 
     public Product(String name, UnitType unit, double pricePerUnit) {
+        if (name == null || unit == null) {
+            throw new NullPointerException("Mandatory fields not provided");
+        }
+        if (name.isEmpty()) {
+            throw new IllegalArgumentException("Name must have at least one character");
+        }
         this.name = name;
         this.unit = unit;
         this.pricePerUnit = pricePerUnit;
