@@ -1,11 +1,20 @@
 package kata.supermarket.model;
 
+import kata.supermarket.service.DiscountRule;
+
+import java.util.Optional;
+
 public class Product {
     private String name;
     private UnitType unit;
     private double pricePerUnit;
+    private Optional<DiscountRule> discount;
 
     public Product(String name, UnitType unit, double pricePerUnit) {
+        this(name, unit, pricePerUnit, Optional.empty());
+    }
+
+    public Product(String name, UnitType unit, double pricePerUnit, Optional<DiscountRule> discount) {
         if (name == null || unit == null) {
             throw new NullPointerException("Mandatory fields not provided");
         }
@@ -15,6 +24,7 @@ public class Product {
         this.name = name;
         this.unit = unit;
         this.pricePerUnit = pricePerUnit;
+        this.discount = discount;
     }
 
     public String getName() {
@@ -27,6 +37,10 @@ public class Product {
 
     public double getPricePerUnit() {
         return pricePerUnit;
+    }
+
+    public Optional<DiscountRule> getDiscount() {
+        return discount;
     }
 
     @Override

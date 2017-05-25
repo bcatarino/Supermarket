@@ -8,11 +8,14 @@ public class Receipt {
 
     private double subtotal;
 
+    private List<Saving> savings;
+
     private double total;
 
-    public Receipt(List<OrderItem> items, double subtotal, double total) {
+    public Receipt(List<OrderItem> items, double subtotal, List<Saving> savings, double total) {
         this.items = items;
         this.subtotal = subtotal;
+        this.savings = savings;
         this.total = total;
     }
 
@@ -22,6 +25,10 @@ public class Receipt {
 
     public double getSubtotal() {
         return subtotal;
+    }
+
+    public List<Saving> getSavings() {
+        return savings;
     }
 
     public double getTotal() {
@@ -37,7 +44,8 @@ public class Receipt {
 
         if (Double.compare(receipt.subtotal, subtotal) != 0) return false;
         if (Double.compare(receipt.total, total) != 0) return false;
-        return items.equals(receipt.items);
+        if (items != null ? !items.equals(receipt.items) : receipt.items != null) return false;
+        return savings != null ? savings.equals(receipt.savings) : receipt.savings == null;
 
     }
 
@@ -45,9 +53,10 @@ public class Receipt {
     public int hashCode() {
         int result;
         long temp;
-        result = items.hashCode();
+        result = items != null ? items.hashCode() : 0;
         temp = Double.doubleToLongBits(subtotal);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (savings != null ? savings.hashCode() : 0);
         temp = Double.doubleToLongBits(total);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;

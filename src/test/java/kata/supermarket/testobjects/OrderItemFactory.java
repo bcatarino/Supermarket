@@ -12,8 +12,16 @@ public final class OrderItemFactory {
         return new OrderItem(beans());
     }
 
+    public static OrderItem beansItemWithSavings() {
+        return new OrderItem(beans3For2());
+    }
+
     public static OrderItem cokeItem() {
         return new OrderItem(coke());
+    }
+
+    public static OrderItem cokeItemWithSavings() {
+        return new OrderItem(coke2For1Pound());
     }
 
     public static OrderItem orangesItem() {
